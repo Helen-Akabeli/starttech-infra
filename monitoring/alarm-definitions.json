@@ -1,0 +1,13 @@
+@'
+{
+  "alarms": [
+    {
+      "name": "starttech-high-cpu",
+      "metric": "CPUUtilization",
+      "threshold": 80,
+      "comparison": "GreaterThanThreshold",
+      "evaluationPeriods": 2
+    }
+  ]
+}
+'@ | Set-Content .\monitoring\alarm-definitions.json

@@ -1,0 +1,13 @@
+@'
+# All application logs
+fields @timestamp, @message
+| sort @timestamp desc
+
+# Errors only
+fields @timestamp, @message
+| filter @message like /ERROR/
+
+# Warnings
+fields @timestamp, @message
+| filter @message like /WARN/
+'@ | Set-Content .\monitoring\log-insights-queries.txt
