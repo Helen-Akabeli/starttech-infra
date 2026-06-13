@@ -13,3 +13,7 @@ output "cloudfront_domain" {
 output "log_group_name" {
   value = module.monitoring.log_group_name
 }
+
+output "alb_dns_name" {
+  value = module.compute.alb_dns_name
+}
