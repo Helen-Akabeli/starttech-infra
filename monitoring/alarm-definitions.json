@@ -1,13 +1,30 @@
-@'
-{
-  "alarms": [
-    {
-      "name": "starttech-high-cpu",
-      "metric": "CPUUtilization",
-      "threshold": 80,
-      "comparison": "GreaterThanThreshold",
-      "evaluationPeriods": 2
-    }
-  ]
-}
-'@ | Set-Content .\monitoring\alarm-definitions.json
+[
+  {
+    "AlarmName": "starttech-backend-high-cpu",
+    "AlarmDescription": "Triggers scale-out if backend CPU exceeds 80%",
+    "MetricName": "CPUUtilization",
+    "Namespace": "AWS/EC2",
+    "Statistic": "Average",
+    "Period": 300,
+    "EvaluationPeriods": 2,
+    "Threshold": 80.0,
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+      {
+        "Name": "AutoScalingGroupName",
+        "Value": "starttech-asg"
+      }
+    ]
+  },
+  {
+    "AlarmName": "starttech-backend-unhealthy-hosts",
+    "AlarmDescription": "Triggers if targets fail target group health checks",
+    "MetricName": "UnHealthyHostCount",
+    "Namespace": "AWS/ApplicationELB",
+    "Statistic": "Average",
+    "Period": 60,
+    "EvaluationPeriods": 1,
+    "Threshold": 1.0,
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold"
+  }
+]

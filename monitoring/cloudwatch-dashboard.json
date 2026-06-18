@@ -1,4 +1,3 @@
-@'
 {
   "widgets": [
     {
@@ -9,14 +8,29 @@
       "height": 6,
       "properties": {
         "metrics": [
-          ["AWS/EC2", "CPUUtilization"]
+          [ "AWS/EC2", "CPUUtilization", "AutoScalingGroupName", "starttech-asg" ]
         ],
         "period": 300,
         "stat": "Average",
         "region": "us-east-1",
-        "title": "EC2 CPU Utilization"
+        "title": "Backend Cluster CPU Utilization"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 0,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "AWS/ApplicationELB", "TargetResponseTime" ]
+        ],
+        "period": 60,
+        "stat": "Average",
+        "region": "us-east-1",
+        "title": "ALB Target Response Time (Latency)"
       }
     }
   ]
 }
-'@ | Set-Content .\monitoring\cloudwatch-dashboard.json
